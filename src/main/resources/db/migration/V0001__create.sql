@@ -1,8 +1,8 @@
-alter table if exists ecommerce.product drop constraint if exists FK5cypb0k23bovo3rn1a5jqs6j4;
-drop table if exists ecommerce.product cascade;
-drop table if exists ecommerce.product_category cascade;
+alter table if exists product drop constraint if exists FK5cypb0k23bovo3rn1a5jqs6j4;
+drop table if exists product cascade;
+drop table if exists product_category cascade;
 
-create table ecommerce.product (
+create table product (
     active boolean,
     unit_price numeric(38,2),
     units_in_stock integer,
@@ -17,12 +17,12 @@ create table ecommerce.product (
     primary key (id)
                                );
 
-create table ecommerce.product_category (
+create table product_category (
     id bigserial not null,
     category_name varchar(255),
     primary key (id)
                                 );
 
-alter table if exists ecommerce.product
+alter table if exists product
     add constraint FK5cypb0k23bovo3rn1a5jqs6j4
-    foreign key (category_id) references ecommerce.product_category;
+    foreign key (category_id) references product_category;
