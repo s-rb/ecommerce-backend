@@ -15,5 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      */
     Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
 
-    Page<Product> findByNameContaining(@Param("name") String name, Pageable pageable);
+    @org.springframework.data.rest.core.annotation.RestResource(path = "findByNameContaining")
+    Page<Product> findByNameContainingIgnoreCase(@Param("name") String name, Pageable pageable);
 }
