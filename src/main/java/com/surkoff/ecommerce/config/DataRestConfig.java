@@ -1,7 +1,9 @@
 package com.surkoff.ecommerce.config;
 
+import com.surkoff.ecommerce.entity.Country;
 import com.surkoff.ecommerce.entity.Product;
 import com.surkoff.ecommerce.entity.ProductCategory;
+import com.surkoff.ecommerce.entity.State;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +33,20 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 
         HttpMethod[] unsupportedMethods = {HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE};
 
-        config.getExposureConfiguration()
-                .forDomainType(Product.class)
-                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods)))
-                .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods)));
-
-        config.getExposureConfiguration()
-                .forDomainType(ProductCategory.class)
-                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods)))
-                .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods)));
+        disableHttpMethods(config, unsupportedMethods, Product.class);
+        disableHttpMethods(config, unsupportedMethods, ProductCategory.class);
+        disableHttpMethods(config, unsupportedMethods, Country.class);
+        disableHttpMethods(config, unsupportedMethods, State.class);
 
         exposeIds(config);
+    }
+
+    private void disableHttpMethods(RepositoryRestConfiguration config, HttpMethod[] unsupportedMethods,
+                                    Class theClass) {
+        config.getExposureConfiguration()
+                .forDomainType(theClass)
+                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods)))
+                .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods)));
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {
