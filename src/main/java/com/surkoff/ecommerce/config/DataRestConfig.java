@@ -1,9 +1,6 @@
 package com.surkoff.ecommerce.config;
 
-import com.surkoff.ecommerce.entity.Country;
-import com.surkoff.ecommerce.entity.Product;
-import com.surkoff.ecommerce.entity.ProductCategory;
-import com.surkoff.ecommerce.entity.State;
+import com.surkoff.ecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +37,7 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(config, unsupportedMethods, ProductCategory.class);
         disableHttpMethods(config, unsupportedMethods, Country.class);
         disableHttpMethods(config, unsupportedMethods, State.class);
+        disableHttpMethods(config, unsupportedMethods, Order.class);
 
         exposeIds(config);
 
