@@ -6,11 +6,12 @@ import com.surkoff.ecommerce.dto.PaymentInfo;
 import com.surkoff.ecommerce.dto.Purchase;
 import com.surkoff.ecommerce.dto.PurchaseResponse;
 import com.surkoff.ecommerce.service.CheckoutService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@Slf4j
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/checkout")
@@ -31,6 +32,7 @@ public class CheckoutController {
 
     @PostMapping("/payment-intent")
     public ResponseEntity<String> createPaymentIntent(@RequestBody PaymentInfo paymentInfo) throws StripeException {
+        log.info("paymentInfo.amount: {}", paymentInfo.getAmount());
         PaymentIntent paymentIntent = checkoutService.createPaymentIntent(paymentInfo);
 
         String paymentStr = paymentIntent.toJson();
