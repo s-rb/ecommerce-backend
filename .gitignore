@@ -76,3 +76,4 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+/src/main/resources/luv2code-keystore.p12

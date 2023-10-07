@@ -8,8 +8,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 
-//import com.okta.spring.boot.oauth.Okta;
-
 @Configuration
 public class SecurityConfiguration {
 
@@ -41,5 +39,4 @@ public class SecurityConfiguration {
 
         return http.build();
     }
-
 }
